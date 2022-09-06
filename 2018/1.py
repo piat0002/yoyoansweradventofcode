@@ -30,7 +30,6 @@ frequence = 0
 alreadySeen = [0]
 compteur = 0
 while True:
-    #print(frequence)
     if listinstruction[compteur][0] == '+':
         #print(i[1:])
         frequence += int(listinstruction[compteur][1:]) 
@@ -43,7 +42,6 @@ while True:
     compteur += 1
     if compteur == len(listinstruction):
         compteur = 0
-
 print(frequence)
 
 ## the time to resolve is big but its work in my case its 464
