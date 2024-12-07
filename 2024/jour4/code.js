@@ -9,7 +9,7 @@ SAXAMASAAA
 MAMMMXMMMM
 MXMXAXMASX`;
 
-input = input2
+//input = input2
 
 //creation de linterface 
 container = document.querySelector(".container");
@@ -249,13 +249,12 @@ async function Resolution(input){
             let elementEnTraitementWasGreen = elementEnTraitement.style.color == "green"
             elementEnTraitement.style.color = `${"blue"} `;
             arrayInputLetter[indexLigne][indexCol]
-            await delay(300);
+            await delay(10);
 
             
             tableXmas = verifAll(arrayInputLetter,indexLigne,indexCol);
             //console.log(tableXmas)
             compteur += tableXmas.length;
-            console.log(elementEnTraitementWasGreen)
             
             elementEnTraitement.style.color = `${elementEnTraitementWasGreen || elementEnTraitement.style.color == "green"  ? "green" : "grey"} `;
         }
