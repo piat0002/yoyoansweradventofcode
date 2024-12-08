@@ -9,7 +9,7 @@ SAXAMASAAA
 MAMMMXMMMM
 MXMXAXMASX`;
 
-//input = input2
+input = input2
 
 //creation de linterface 
 container = document.querySelector(".container");
@@ -48,193 +48,179 @@ function isInRange(indexLigne,indexCol,arrayInputlength,ligneLength){
     return indexLigne >= 0 && indexCol >= 0 && indexLigne < arrayInputlength && indexCol < ligneLength;
 }
 
-function srcheachXmax(arrayInputLetter,indexLigne,indexCol,letterIndex){
-    if (arrayInputLetter == "X") {
-        
-    }
-}
-
 function colorToGreen(ligne,colonne){
     let selector = `.l${ligne} > .c${colonne}`;
     let elementEnTraitement = document.querySelector(selector);
     elementEnTraitement.style.color = "green";
 }
 
-const Xmas = "XMAS"
+const mas = "MAS"
+const sam = "SAM"
 function verifAll(arrayInputLetter,indexLigne,indexCol){
     let arrayXmas = []
     if(isInRange(indexLigne,indexCol,arrayInputLetter.length,arrayInputLetter[0].length) ){
-        if(arrayInputLetter[indexLigne][indexCol] != Xmas[0]){
+        if(arrayInputLetter[indexLigne][indexCol] != mas[1]){
             return arrayXmas
         }
     }
-    //pas opti mais le code est simplifier
-    if (verifColBas(arrayInputLetter,indexLigne,indexCol)) arrayXmas.push("CB");
-    if (verifColHaut(arrayInputLetter,indexLigne,indexCol)) arrayXmas.push("CH");
-    if (verifDiaBasDer(arrayInputLetter,indexLigne,indexCol)) arrayXmas.push("DBD");
-    if (verifDiaBasDevant(arrayInputLetter,indexLigne,indexCol)) arrayXmas.push("DBV");
-    if (verifDiaHautDer(arrayInputLetter,indexLigne,indexCol)) arrayXmas.push("DHR");
-    if (verifDiaHautDevant(arrayInputLetter,indexLigne,indexCol)) arrayXmas.push("DHV");
-    if (verifLigneDer(arrayInputLetter,indexLigne,indexCol)) arrayXmas.push("LDR");
-    if (verifLigneDevant(arrayInputLetter,indexLigne,indexCol)) arrayXmas.push("LDV");
+    if (IsXMAS1(arrayInputLetter,indexLigne,indexCol)) arrayXmas.push("XMAS1");
+    if (IsXSAM1(arrayInputLetter,indexLigne,indexCol)) arrayXmas.push("XSAM1");
+    if (IsXMAS2(arrayInputLetter,indexLigne,indexCol)) arrayXmas.push("XMAS2");
+    if (IsXSAM2(arrayInputLetter,indexLigne,indexCol)) arrayXmas.push("XSAM2");
     return arrayXmas
 }
-function verifLigneDevant(arrayInputLetter,indexLigne,indexCol){
-    for (let i = 1; i < 4; i++) {
-        let ligne = indexLigne;
-        let colonne = indexCol + i;
-        if(!isInRange(ligne,colonne,arrayInputLetter.length,arrayInputLetter[0].length)){
-            return false
-        }
-        if(arrayInputLetter[ligne][colonne] != Xmas[i]){
-            return false
-        }
-    }
-    for (let i = 0; i < 4; i++) {
-        let ligne = indexLigne;
-        let colonne = indexCol + i;
-        colorToGreen(ligne,colonne)
-    }
-    
-    return true
-}
-function verifLigneDer(arrayInputLetter,indexLigne,indexCol){
-    for (let i = 1; i < 4; i++) {
-        let ligne = indexLigne;
-        let colonne = indexCol - i;
-        if(!isInRange(ligne,colonne,arrayInputLetter.length,arrayInputLetter[0].length)){
-            return false
-        }
-        if(arrayInputLetter[ligne][colonne] != Xmas[i]){
-            return false
-        }
 
-    }
-    for (let i = 0; i < 4; i++) {
-        let ligne = indexLigne;
-        let colonne = indexCol - i;
-        colorToGreen(ligne,colonne)
-    }
-    
-    return true
-}
-function verifDiaHautDevant(arrayInputLetter,indexLigne,indexCol){
-    for (let i = 1; i < 4; i++) {
+function IsXMAS1(arrayInputLetter,indexLigne,indexCol){
+    //mas
+    //diago bas devant
+    for (let i = -1; i < 2; i++) {
         let ligne = indexLigne + i;
         let colonne = indexCol - i;
         if(!isInRange(ligne,colonne,arrayInputLetter.length,arrayInputLetter[0].length)){
             return false
         }
-        if(arrayInputLetter[ligne][colonne] != Xmas[i]){
+        if(arrayInputLetter[ligne][colonne] != mas[i+1]){
             return false
         }
-        
     }
-    for (let i = 0; i < 4; i++) {
-        let ligne = indexLigne + i;
-        let colonne = indexCol - i;
-        colorToGreen(ligne,colonne)
-    }
-    return true
-}
-function verifDiaBasDevant(arrayInputLetter,indexLigne,indexCol){
-    for (let i = 1; i < 4; i++) {
+    //diago bas devant
+    for (let i = -1; i < 2; i++) {
         let ligne = indexLigne + i;
         let colonne = indexCol + i;
         if(!isInRange(ligne,colonne,arrayInputLetter.length,arrayInputLetter[0].length)){
             return false
         }
-        if(arrayInputLetter[ligne][colonne] != Xmas[i]){
+        if(arrayInputLetter[ligne][colonne] != mas[i+1]){
             return false
         }
         
     }
-    for (let i = 0; i < 4; i++) {
-        
+
+    //color green si tous est bon
+    for (let i = -1; i < 2; i++) {
         let ligne = indexLigne + i;
-        let colonne = indexCol + i;
-        colorToGreen(ligne,colonne)
+        let colonne = indexCol - i;
+        colorToGreen(ligne,colonne);
+
+        ligne = indexLigne + i;
+        colonne = indexCol + i;
+        colorToGreen(ligne,colonne);
     }
     return true
 }
-function verifDiaBasDer(arrayInputLetter,indexLigne,indexCol){
-    for (let i = 1; i < 4; i++) {
-        let ligne = indexLigne - i;
-        let colonne = indexCol + i;
-        if(!isInRange(ligne,colonne,arrayInputLetter.length,arrayInputLetter[0].length)){
-            return false
-        }
-        if(arrayInputLetter[ligne][colonne] != Xmas[i]){
-            return false
-        }
-        
-    }
-    for (let i = 0; i < 4; i++) {
-        
-        let ligne = indexLigne - i;
-        let colonne = indexCol + i;
-        colorToGreen(ligne,colonne)
-    }
-    return true
-}
-function verifDiaHautDer(arrayInputLetter,indexLigne,indexCol){
-    for (let i = 1; i < 4; i++) {
-        let ligne = indexLigne - i;
+function IsXMAS2(arrayInputLetter,indexLigne,indexCol){
+    //mas
+    //diago bas devant
+    for (let i = -1; i < 2; i++) {
+        let ligne = indexLigne + i;
         let colonne = indexCol - i;
         if(!isInRange(ligne,colonne,arrayInputLetter.length,arrayInputLetter[0].length)){
             return false
         }
-        if(arrayInputLetter[ligne][colonne] != Xmas[i]){
+        if(arrayInputLetter[ligne][colonne] != mas[i+1]){
+            return false
+        }
+    }
+    //diago bas devant
+    for (let i = -1; i < 2; i++) {
+        let ligne = indexLigne + i;
+        let colonne = indexCol + i;
+        if(!isInRange(ligne,colonne,arrayInputLetter.length,arrayInputLetter[0].length)){
+            return false
+        }
+        if(arrayInputLetter[ligne][colonne] != sam[i+1]){
             return false
         }
         
     }
-    for (let i = 0; i < 4; i++) {
-        
-        let ligne = indexLigne - i;
+
+    //color green si tous est bon
+    for (let i = -1; i < 2; i++) {
+        let ligne = indexLigne + i;
         let colonne = indexCol - i;
-        colorToGreen(ligne,colonne)
+        colorToGreen(ligne,colonne);
+
+        ligne = indexLigne + i;
+        colonne = indexCol + i;
+        colorToGreen(ligne,colonne);
     }
     return true
 }
-function verifColHaut(arrayInputLetter,indexLigne,indexCol){
-    for (let i = 1; i < 4; i++) {
-        let ligne = indexLigne - i;
-        let colonne = indexCol;
-        if(!isInRange(ligne,colonne,arrayInputLetter.length,arrayInputLetter[0].length)){
-            return false
-        }
-        if(arrayInputLetter[ligne][colonne] != Xmas[i]){
-            return false
-        }
-        
-    }    
-    for (let i = 0; i < 4; i++) {
-        let ligne = indexLigne - i;
-        let colonne = indexCol;
-        colorToGreen(ligne,colonne)
-    }
-    return true
-}
-function verifColBas(arrayInputLetter,indexLigne,indexCol){
-    for (let i = 1; i < 4; i++) {
+function IsXSAM1(arrayInputLetter,indexLigne,indexCol){
+    //sam
+    //diago bas devant
+    for (let i = -1; i < 2; i++) {
         let ligne = indexLigne + i;
-        let colonne = indexCol;
+        let colonne = indexCol - i;
         if(!isInRange(ligne,colonne,arrayInputLetter.length,arrayInputLetter[0].length)){
             return false
         }
-        if(arrayInputLetter[ligne][colonne] != Xmas[i]){
+        if(arrayInputLetter[ligne][colonne] != sam[i+1]){
+            return false
+        }
+    }
+    //diago bas devant
+    for (let i = -1; i < 2; i++) {
+        let ligne = indexLigne + i;
+        let colonne = indexCol + i;
+        if(!isInRange(ligne,colonne,arrayInputLetter.length,arrayInputLetter[0].length)){
+            return false
+        }
+        if(arrayInputLetter[ligne][colonne] != sam[i+1]){
             return false
         }
         
     }
-    for (let i = 0; i < 4; i++) {
+    //color green si tous est bon
+    for (let i = -1; i < 2; i++) {
         let ligne = indexLigne + i;
-        let colonne = indexCol;
-        colorToGreen(ligne,colonne)
+        let colonne = indexCol - i;
+        colorToGreen(ligne,colonne);
+
+        ligne = indexLigne + i;
+        colonne = indexCol + i;
+        colorToGreen(ligne,colonne);
     }
     return true
 }
+function IsXSAM2(arrayInputLetter,indexLigne,indexCol){
+    //sam
+    //diago bas devant
+    for (let i = -1; i < 2; i++) {
+        let ligne = indexLigne + i;
+        let colonne = indexCol - i;
+        if(!isInRange(ligne,colonne,arrayInputLetter.length,arrayInputLetter[0].length)){
+            return false
+        }
+        if(arrayInputLetter[ligne][colonne] != sam[i+1]){
+            return false
+        }
+    }
+    //diago bas devant
+    for (let i = -1; i < 2; i++) {
+        let ligne = indexLigne + i;
+        let colonne = indexCol + i;
+        if(!isInRange(ligne,colonne,arrayInputLetter.length,arrayInputLetter[0].length)){
+            return false
+        }
+        if(arrayInputLetter[ligne][colonne] != mas[i+1]){
+            return false
+        }
+        
+    }
+    //color green si tous est bon
+    for (let i = -1; i < 2; i++) {
+        let ligne = indexLigne + i;
+        let colonne = indexCol - i;
+        colorToGreen(ligne,colonne);
+
+        ligne = indexLigne + i;
+        colonne = indexCol + i;
+        colorToGreen(ligne,colonne);
+    }
+    return true
+}
+
 async function Resolution(input){
     let compteur = 0; 
     let arrayInput = input.split(/\r?\n|\r|\n/g);
@@ -249,11 +235,11 @@ async function Resolution(input){
             let elementEnTraitementWasGreen = elementEnTraitement.style.color == "green"
             elementEnTraitement.style.color = `${"blue"} `;
             arrayInputLetter[indexLigne][indexCol]
-            await delay(10);
+            await delay(100);
 
             
             tableXmas = verifAll(arrayInputLetter,indexLigne,indexCol);
-            //console.log(tableXmas)
+            console.log(tableXmas)
             compteur += tableXmas.length;
             
             elementEnTraitement.style.color = `${elementEnTraitementWasGreen || elementEnTraitement.style.color == "green"  ? "green" : "grey"} `;
